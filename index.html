@@ -255,23 +255,51 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="bg-vscode rounded-lg p-4 text-sm font-mono">
-                        <div class="text-vscode-muted mb-2">Performance on large projects:</div>
-                        <div class="space-y-2">
-                            <div class="flex justify-between">
-                                <span class="text-blue-400">10K files</span>
-                                <span class="text-green-400">&lt;100ms</span>
+                    <div class="bg-vscode rounded-lg p-4 text-sm">
+                        <div class="text-vscode-muted mb-4 font-semibold">Fuzzy Search Performance (Edit Distance 1):</div>
+                        <div class="space-y-3 font-mono">
+                            <div class="grid grid-cols-3 gap-4 text-xs text-vscode-muted border-b border-vscode pb-2">
+                                <span>Codebase Size</span>
+                                <span>Files</span>
+                                <span>Execution Time</span>
                             </div>
-                            <div class="flex justify-between">
-                                <span class="text-blue-400">50K files</span>
-                                <span class="text-green-400">&lt;250ms</span>
+                            <div class="grid grid-cols-3 gap-4">
+                                <span class="text-blue-400">Small</span>
+                                <span class="text-vscode-muted">1K files</span>
+                                <span class="text-green-400">0.18s</span>
                             </div>
-                            <div class="flex justify-between">
-                                <span class="text-blue-400">100K+ files</span>
-                                <span class="text-green-400">&lt;500ms</span>
+                            <div class="grid grid-cols-3 gap-4">
+                                <span class="text-blue-400">Medium</span>
+                                <span class="text-vscode-muted">10K files</span>
+                                <span class="text-green-400">1.13s</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4">
+                                <span class="text-blue-400">Large</span>
+                                <span class="text-vscode-muted">100K files</span>
+                                <span class="text-green-400">3.92s</span>
                             </div>
                         </div>
-                        <div class="text-xs text-vscode-muted mt-3">Average search response times</div>
+                        
+                        <div class="text-vscode-muted mb-3 mt-6 font-semibold">Algorithm Comparison (Large Codebase):</div>
+                        <div class="space-y-2 font-mono text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-yellow-400">SearchMaster Fuzzy</span>
+                                <span class="text-green-400">3.92s</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Vector Search</span>
+                                <span class="text-red-400">3.10s*</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Language Model</span>
+                                <span class="text-red-400">3.45s*</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Boolean Search</span>
+                                <span class="text-red-400">2.82s*</span>
+                            </div>
+                        </div>
+                        <div class="text-xs text-vscode-muted mt-3">*Without fuzzy matching capability. Benchmarked on 100K file codebase.</div>
                     </div>
                 </div>
             </div>
