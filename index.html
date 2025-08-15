@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SearchMaster - Advanced fuzzy search extension for Visual Studio Code. Download and enhance your coding experience with intelligent search capabilities.">
+    <meta name="keywords" content="VSCode, extension, search, fuzzy search, Visual Studio Code, development tools">
+    <meta name="author" content="Alex Kanellis">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/searchmaster-site/">
+    <meta property="og:title" content="SearchMaster - VS Code Extension">
+    <meta property="og:description" content="Advanced fuzzy search extension for Visual Studio Code with configurable edit distance and intelligent results ranking.">
+    <meta property="og:image" content="./assets/icons/research-svgrepo-com.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourusername.github.io/searchmaster-site/">
+    <meta property="twitter:title" content="SearchMaster - VS Code Extension">
+    <meta property="twitter:description" content="Advanced fuzzy search extension for Visual Studio Code with configurable edit distance and intelligent results ranking.">
+    <meta property="twitter:image" content="./assets/icons/research-svgrepo-com.png">
+
+    <title>SearchMaster - VS Code Extension</title>
+    <link rel="icon" type="image/png" href="./assets/icons/research-svgrepo-com.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom styles -->
+    <style>
+        /* VS Code inspired color scheme */
+        :root {
+            --vscode-bg: #1e1e1e;
+            --vscode-bg-light: #252526;
+            --vscode-accent: #007acc;
+            --vscode-accent-light: #4fc3f7;
+            --vscode-text: #cccccc;
+            --vscode-text-muted: #969696;
+            --vscode-border: #463f3a;
+        }
+        
+        .bg-vscode { background-color: var(--vscode-bg); }
+        .bg-vscode-light { background-color: var(--vscode-bg-light); }
+        .text-vscode { color: var(--vscode-text); }
+        .text-vscode-muted { color: var(--vscode-text-muted); }
+        .border-vscode { border-color: var(--vscode-border); }
+        .accent { color: var(--vscode-accent); }
+        .accent-light { color: var(--vscode-accent-light); }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(0,122,204,0.15) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-vscode text-vscode">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-vscode-light border-b border-vscode z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <img src="./assets/icons/research-svgrepo-com.png" alt="SearchMaster Logo" class="w-8 h-8">
+                    <span class="text-xl font-bold">SearchMaster</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#overview" class="hover:text-vscode-accent-light transition-colors">Overview</a>
+                    <a href="#how-it-works" class="hover:text-vscode-accent-light transition-colors">How It Works</a>
+                    <a href="#installation" class="hover:text-vscode-accent-light transition-colors">Installation</a>
+                    <a href="#features" class="hover:text-vscode-accent-light transition-colors">Features</a>
+                    <a href="#download" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors">Download</a>
+                </div>
+                <button class="md:hidden" id="mobile-menu-button">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="pt-20 pb-16 hero-pattern">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="mb-8">
+                    <img src="./assets/icons/research-svgrepo-com.png" alt="SearchMaster Logo" class="w-24 h-24 mx-auto mb-6">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                        Search<span class="accent">Master</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-vscode-muted mb-8">
+                        Advanced fuzzy search extension for Visual Studio Code
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#download" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors">
+                        Download Extension
+                    </a>
+                    <a href="#how-it-works" class="border border-vscode hover:border-vscode-accent-light px-8 py-3 rounded-lg text-lg transition-colors">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Why SearchMaster?</h2>
+                <p class="text-xl text-vscode-muted max-w-3xl mx-auto">
+                    Take your VS Code search capabilities to the next level with intelligent fuzzy search, 
+                    configurable edit distance, and ranked results that help you find exactly what you're looking for.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-vscode-light rounded-lg border border-vscode">
+                    <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Smart Fuzzy Search</h3>
+                    <p class="text-vscode-muted">Find files and content even with typos or partial matches using advanced fuzzy search algorithms.</p>
+                </div>
+                <div class="text-center p-6 bg-vscode-light rounded-lg border border-vscode">
+                    <div class="w-16 h-16 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Configurable Precision</h3>
+                    <p class="text-vscode-muted">Adjust edit distance to control how fuzzy your searches are, from exact matches to broadly similar terms.</p>
+                </div>
+                <div class="text-center p-6 bg-vscode-light rounded-lg border border-vscode">
+                    <div class="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Ranked Results</h3>
+                    <p class="text-vscode-muted">Results are automatically ranked by relevance, putting the closest matches first for faster navigation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 bg-vscode-light">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+                <p class="text-xl text-vscode-muted">
+                    SearchMaster uses advanced fuzzy search algorithms to help you find content even when your search isn't perfect
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Exact vs Fuzzy Search</h3>
+                    <div class="space-y-6">
+                        <div class="p-4 bg-vscode rounded-lg border border-vscode">
+                            <h4 class="font-semibold text-green-400 mb-2">✓ Exact Matches</h4>
+                            <p class="text-vscode-muted">Traditional search requiring perfect character matching. Great for precise searches when you know exactly what you're looking for.</p>
+                        </div>
+                        <div class="p-4 bg-vscode rounded-lg border border-vscode">
+                            <h4 class="font-semibold text-blue-400 mb-2">~ Fuzzy Matches</h4>
+                            <p class="text-vscode-muted">Intelligent search that finds similar content even with typos, missing characters, or slight variations. Perfect for exploration and when memory is fuzzy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-vscode rounded-lg border border-vscode p-6">
+                    <h4 class="font-semibold mb-4">Edit Distance Example</h4>
+                    <div class="space-y-3 text-sm font-mono">
+                        <div class="flex justify-between">
+                            <span class="text-yellow-400">"hello"</span>
+                            <span class="text-vscode-muted">→</span>
+                            <span class="text-green-400">"hello"</span>
+                            <span class="text-vscode-muted">Distance: 0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-yellow-400">"hello"</span>
+                            <span class="text-vscode-muted">→</span>
+                            <span class="text-green-400">"jello"</span>
+                            <span class="text-vscode-muted">Distance: 1</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-yellow-400">"hello"</span>
+                            <span class="text-vscode-muted">→</span>
+                            <span class="text-green-400">"helo"</span>
+                            <span class="text-vscode-muted">Distance: 1</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-yellow-400">"hello"</span>
+                            <span class="text-vscode-muted">→</span>
+                            <span class="text-green-400">"yellow"</span>
+                            <span class="text-vscode-muted">Distance: 2</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-vscode-muted mt-4">
+                        Edit distance measures character changes needed (insertions, deletions, substitutions)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Demo Section -->
+    <section id="demo" class="py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">See It In Action</h2>
+                <p class="text-xl text-vscode-muted">
+                    Watch SearchMaster enhance your VS Code search experience
+                </p>
+            </div>
+            
+            <!-- Video/GIF placeholder -->
+            <div class="bg-vscode-light rounded-lg border border-vscode p-8 text-center mb-8">
+                <div class="bg-gray-800 rounded-lg h-64 md:h-96 flex items-center justify-center mb-4">
+                    <div class="text-center">
+                        <svg class="w-16 h-16 mx-auto text-vscode-accent mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h6m-6 4h6M5 20a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2H7a2 2 0 00-2 2v16z"></path>
+                        </svg>
+                        <p class="text-vscode-muted">Demo video coming soon</p>
+                        <p class="text-sm text-vscode-muted">Record a short screencast showing the extension in action</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screenshot Gallery -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-vscode-light rounded-lg border border-vscode overflow-hidden">
+                    <img src="./assets/img/image.png" alt="Download Extension" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-semibold mb-2">Step 1: Download</h4>
+                        <p class="text-sm text-vscode-muted">Download the .vsix extension file</p>
+                    </div>
+                </div>
+                <div class="bg-vscode-light rounded-lg border border-vscode overflow-hidden">
+                    <img src="./assets/img/image2.png" alt="Extensions Panel" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-semibold mb-2">Step 2: Extensions</h4>
+                        <p class="text-sm text-vscode-muted">Navigate to the Extensions panel</p>
+                    </div>
+                </div>
+                <div class="bg-vscode-light rounded-lg border border-vscode overflow-hidden">
+                    <img src="./assets/img/image3.png" alt="Install from VSIX" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-semibold mb-2">Step 3: Install</h4>
+                        <p class="text-sm text-vscode-muted">Install from VSIX file</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Guide -->
+    <section id="installation" class="py-16 bg-vscode-light">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Installation Guide</h2>
+                <p class="text-xl text-vscode-muted">
+                    Get SearchMaster up and running in VS Code in just a few steps
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">Download the Extension</h3>
+                        <p class="text-vscode-muted mb-4">Click the download button below to get the latest SearchMaster .vsix file.</p>
+                        <a href="./assets/downloads/search-master-0.0.0.vsix" download class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Download search-master-0.0.0.vsix
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">Open VS Code Extensions Panel</h3>
+                        <p class="text-vscode-muted mb-4">Navigate to the Extensions view by clicking the Extensions icon in the Activity Bar.</p>
+                        <div class="bg-vscode rounded-lg p-3 text-sm font-mono border border-vscode">
+                            <span class="text-vscode-muted">Shortcut:</span> <span class="text-yellow-400">Ctrl+Shift+X</span> (Windows/Linux) or <span class="text-yellow-400">Cmd+Shift+X</span> (macOS)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">Install from VSIX</h3>
+                        <p class="text-vscode-muted mb-4">Click the three dots menu (⋯) in the Extensions view and select "Install from VSIX..."</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">Select and Install</h3>
+                        <p class="text-vscode-muted mb-4">Browse to the downloaded .vsix file, select it, and click "Install". VS Code will install the extension automatically.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">✓</div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">Start Searching!</h3>
+                        <p class="text-vscode-muted">SearchMaster will appear in your sidebar. Click the SearchMaster icon to open the search panel and start using advanced fuzzy search.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Features -->
+    <section id="features" class="py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Technical Features</h2>
+                <p class="text-xl text-vscode-muted">
+                    Built with performance and usability in mind
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="p-6 bg-vscode-light rounded-lg border border-vscode">
+                        <h3 class="text-xl font-semibold mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            Configurable Settings
+                        </h3>
+                        <ul class="space-y-2 text-vscode-muted">
+                            <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Adjustable edit distance</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Welcome message customization</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>Emoji preferences</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-6 bg-vscode-light rounded-lg border border-vscode">
+                        <h3 class="text-xl font-semibold mb-3 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            Performance
+                        </h3>
+                        <ul class="space-y-2 text-vscode-muted">
+                            <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>Fast fuzzy search algorithms</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>Ranked result ordering</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>Efficient file navigation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-vscode-light rounded-lg border border-vscode p-6">
+                    <h3 class="text-xl font-semibold mb-4">Configuration Example</h3>
+                    <div class="bg-vscode rounded-lg p-4 text-sm font-mono overflow-x-auto">
+                        <pre class="text-vscode"><span class="text-blue-400">{</span>
+  <span class="text-yellow-400">"searchmaster.welcom.message.enabled"</span><span class="text-vscode">:</span> <span class="text-green-400">true</span><span class="text-vscode">,</span>
+  <span class="text-yellow-400">"searchmaster.welcom.message.emoji"</span><span class="text-vscode">:</span> <span class="text-green-400">"👋"</span><span class="text-vscode">,</span>
+  <span class="text-yellow-400">"searchmaster.welcom.message.string"</span><span class="text-vscode">:</span> 
+    <span class="text-green-400">"Welcome to SearchMaster!"</span>
+<span class="text-blue-400">}</span></pre>
+                    </div>
+                    <p class="text-xs text-vscode-muted mt-3">Add to your VS Code settings.json to customize the extension</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-16 bg-gradient-to-r from-blue-600 to-blue-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to enhance your VS Code?</h2>
+            <p class="text-xl text-blue-100 mb-8">
+                Download SearchMaster now and experience the power of intelligent fuzzy search
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                <a href="./assets/downloads/search-master-0.0.0.vsix" download 
+                   class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-colors inline-flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Download Extension
+                </a>
+                <a href="#installation" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
+                    Installation Guide
+                </a>
+            </div>
+
+            <div class="text-sm text-blue-200">
+                <p>Version 0.0.0 • Compatible with VS Code 1.72.0+</p>
+                <p class="mt-2">Free and open source • MIT License</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-vscode-light border-t border-vscode">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <img src="./assets/icons/research-svgrepo-com.png" alt="SearchMaster Logo" class="w-8 h-8">
+                    <div>
+                        <div class="font-semibold">SearchMaster</div>
+                        <div class="text-sm text-vscode-muted">VS Code Extension</div>
+                    </div>
+                </div>
+                <div class="flex space-x-6 text-sm">
+                    <a href="https://github.com/VSCode-Fuzzy-Search/SearchMaster" class="text-vscode-muted hover:text-vscode-accent-light transition-colors">GitHub</a>
+                    <a href="#installation" class="text-vscode-muted hover:text-vscode-accent-light transition-colors">Documentation</a>
+                    <a href="#features" class="text-vscode-muted hover:text-vscode-accent-light transition-colors">Features</a>
+                </div>
+            </div>
+            <div class="border-t border-vscode mt-8 pt-8 text-center text-sm text-vscode-muted">
+                <p>&copy; 2024 Alex Kanellis. All rights reserved. • Built with ❤️ for the VS Code community</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>
